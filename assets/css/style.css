@@ -1,0 +1,416 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #070505;
+    font-family: montserrat, sans-serif;
+    font-size: 20px;
+    font-weight: 550;
+    line-height: 150%;
+}
+
+/* index.html, gallery.html, news.html and contact.html style */
+
+.background-img {
+    background: url("assets/images/image-background.webp") no-repeat center center;
+    overflow-x: hidden;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* hedings and logo */
+
+h2,
+h3,
+h4 {
+    color: #023047;
+    font-family: open san, sans-serif;
+    letter-spacing: 2px;
+    font-weight: 100;
+}
+
+#logo {
+    color: antiquewhite;
+    font-family: libre bodoni, serif;
+    font-size: 300%;
+    font-weight: 400;
+    letter-spacing: 4px;
+    line-height: 400%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* hero image and menu links*/
+
+#hero {
+    border: 3px solid antiquewhite;
+    border-radius: 5px;
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+    background-color: #264653;
+}
+
+#page-link {
+    /* list-style-type: none; */
+    text-decoration: none;
+    /* color: antiquewhite; */
+}
+
+#page-link a:hover {
+    border-bottom: 2px solid antiquewhite;
+}
+
+#menu-link {
+    color: #023047;
+    font-family: open san, sans-serif;
+    font-size: 100%;
+    font-weight: 200;
+    letter-spacing: 2px;
+    line-height: 10px;
+    margin: 20px 0 20px 0;
+    text-align: center;
+}
+
+#menu-link li {
+    display: inline-block;
+    list-style-type: none;
+    margin-right: 60px;
+}
+
+#menu-link a {
+    text-decoration: none;
+    color: #023047;
+}
+
+#menu-link a:hover {
+    border-bottom: 2px solid #023047;
+}
+
+.active-page {
+    border-bottom: 2px solid #023047;
+}
+
+/* Introduction section */
+
+hr {
+    border-bottom: 2px solid #023047;
+    width: 100%;
+    margin: 10px;
+}
+
+#intro {
+    text-align: center;
+    margin: 20px 10px;
+    padding: 10px 0;
+}
+
+#intro a {
+    text-decoration: none;
+}
+
+#intro a:hover {
+    border-bottom: 2px solid #023047;
+
+}
+
+.about-us {
+    display: inline-block;
+    vertical-align: top;
+    height: 200px;
+    width: 30%;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+}
+
+.section-headings {
+    text-align: center;
+    line-height: 100%;
+    font-size: 200%;
+    clear: both;
+}
+
+.about-us-headings {
+    font-size: 150%;
+    text-align: center;
+}
+
+/* Extra activities */
+
+#activities-times {
+    margin-left: 10px;
+
+}
+
+#activities-times div {
+    background-color: rgba(30, 70, 83, .7);
+    border-radius: 5px;
+    width: 14%;
+    height: 250px;
+    display: inline-block;
+    padding-right: 10px;
+    vertical-align: top;
+    text-align: center;
+    border: 3px solid #264653;
+    box-sizing: border-box;
+
+}
+
+.times h3 {
+    color: antiquewhite;
+    line-height: 150%;
+    margin-top: 5px;
+
+}
+
+.times h4 {
+    color: antiquewhite;
+    line-height: 150%;
+}
+
+/* Footer */
+
+footer {
+    height: 100px;
+}
+
+.social-media {
+    text-align: center;
+    margin-top: 30px;
+    line-height: 125%;
+}
+
+.social-media li {
+    display: inline;
+    font-size: 120%;
+    margin: 3%;
+}
+
+.social-media i {
+    color: #023047;
+}
+
+
+/* News Page Style */
+
+#news-box {
+    height: 500px;
+    width: 700px;
+    margin: auto;
+    background-color: rgba(30, 70, 83, .7);
+    border: 3px solid #264653;
+    border-radius: 5%;
+}
+
+#news-box p {
+    color: antiquewhite;
+    margin: 20px 5px 30px 5px;
+    text-align: center;
+}
+
+#news-box p a {
+    text-decoration: none;
+}
+
+#news-box p a:hover {
+    border-bottom: 2px solid #023047;
+}
+
+/* Galery Page Style*/
+
+#galery-page {
+    clear: both;
+    line-height: 0;
+    column-count: 3;
+    column-gap: 0px;
+
+}
+
+#galery-page img {
+    width: 100%;
+}
+
+/* Contact Us Page Style */
+
+#form-heading {
+    color: antiquewhite;
+    line-height: 150%;
+    text-align: center;
+}
+
+#contact-us p {
+    text-align: center;
+}
+
+#contact-box {
+    background: url('../BrivaLaikaPavadisanasPortals/flowers-276014_1920.webp');
+    background-position: center;
+    background-size: cover;
+    margin: auto;
+    height: 900px;
+    width: 100%;
+    clear: left;
+}
+
+#contact-form {
+    color: antiquewhite;
+    background-color: rgba(38, 70, 83, 0.60);
+    max-width: 400%;
+    margin: 30px 0;
+    position: absolute;
+    left: 10%;
+    padding: 30px;
+}
+
+#tell-more textarea {
+    background: transparent;
+    color: antiquewhite;
+    border: 1px solid antiquewhite;
+    width: 90%;
+    margin: 5px 20px;
+    font-size: 15px;
+}
+
+
+.fill-out {
+    background: transparent;
+    color: antiquewhite;
+    width: 90%;
+    height: 25px;
+    border: 1px solid antiquewhite;
+    margin: 5px 20px;
+}
+
+.line-box {
+    border: 1px solid antiquewhite;
+    margin: 25px;
+}
+
+.send-button {
+    background-color: #264653;
+    color: antiquewhite;
+    border: 1px solid antiquewhite;
+    font-size: 100%;
+    text-align: center;
+    width: 25%;
+    height: 25px;
+    position: absolute;
+    left: 300px;
+    bottom: 15px;
+}
+
+.send-button:hover {
+    background-color: antiquewhite;
+    color: #023047;
+}
+
+::placeholder {
+    color: antiquewhite;
+}
+
+/* Media Queries */
+
+/* For larger to medium screens size from 1600px wide and down */
+
+@media screen and (max-width: 1600px) {
+    hr {
+        display: none;
+    }
+
+    #activities-times div {
+        margin: auto;
+        width: 50%;
+        display: block;
+        height: initial;
+    }
+
+    #contact-form {
+        left: 0;
+    }
+}
+
+/* For larger to medium screens size from 1100px wide and down */
+
+@media screen and (max-width: 1100px) {
+    .about-us {
+        display: block;
+        height: fit-content;
+        width: 90%;
+        margin: auto;
+    }
+}
+
+/* For small screen sizes below 800px width */
+
+@media screen and (max-width: 800px) {
+    #logo {
+        font-size: 250%;
+        line-height: 295%;
+    }
+
+    #menu-link li {
+        margin-right: 10px;
+    }
+
+    #news-box {
+        height: 800px;
+        width: 350px;
+    }
+
+    #galery-page {
+        column-count: 2;
+    }
+
+    #contact-form {
+        margin: 30px 0;
+        padding: 20px;
+    }
+
+    .send-button {
+        left: 150px;
+        bottom: 10px;
+    }
+}
+
+/* For small screen sizes below 420px width */
+
+@media screen and (max-width: 420px) {
+    h2 {
+        letter-spacing: normal;
+    }    
+
+    #menu-link li {
+        line-height: normal;
+    }
+
+    #logo {
+        font-size: 200%;
+        line-height: 200%;
+    }
+
+    #activities-times div {        
+        width: 80%;        
+    }
+
+    #news-box {
+        height: 900px;
+        width: fit-content;
+    }
+
+    #galery-page {
+        column-count: 1;
+    }
+
+    #contact-form {
+        margin: 10px 0;
+        padding: 20px;
+    }
+
+    .send-button {
+        left: 120px;
+    }
+}

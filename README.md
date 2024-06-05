@@ -1,8 +1,8 @@
-# DP4-4-MatissSmits-BrivalaikaPavadisanasPortals
+# Brīvā laika pavadīšanas portāls
+
 ## Par projektu
 
-Brīvā laika pavadīšanas portāls ir tīmekļa vietne, kas piedāvā plašu aktivitāšu klāstu, lai palīdzētu lietotājiem atrast un piedalīties dažādās brīvā laika aktivitātēs, piemēram, teikvando un judo treniņos. 
-Portāls ir piemērots dažādu vecuma grupu cilvēkiem un piedāvā aktivitātes gan bērniem, gan pieaugušajiem. 
+Brīvā laika pavadīšanas portāls ir tīmekļa vietne, kas piedāvā plašu aktivitāšu klāstu, lai palīdzētu lietotājiem atrast un piedalīties dažādās brīvā laika aktivitātēs, piemēram, teikvando un judo treniņos. Portāls ir piemērots dažādu vecuma grupu cilvēkiem un piedāvā aktivitātes gan bērniem, gan pieaugušajiem. 
 
 ## Funkcijas
 
@@ -63,3 +63,6 @@ Projekta datu bāze ietver šādas tabulas:
 ## Autori
 
 - **Matīss Šmits** - Projekta izstrādātājs
+
+
+
