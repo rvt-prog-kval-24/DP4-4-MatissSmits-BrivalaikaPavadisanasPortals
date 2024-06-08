@@ -1,4 +1,4 @@
-* {
+/* * {
     border: 0;
     margin: 0;
     padding: 0;
@@ -12,7 +12,6 @@ body {
     line-height: 150%;
 }
 
-/* index.html, gallery.html, news.html and contact.html style */
 
 .background-img {
     background: url("assets/images/image-background.webp") no-repeat center center;
@@ -21,7 +20,6 @@ body {
     background-attachment: fixed;
 }
 
-/* hedings and logo */
 
 h2,
 h3,
@@ -43,7 +41,6 @@ h4 {
     text-transform: uppercase;
 }
 
-/* hero image and menu links*/
 
 #hero {
     border: 3px solid antiquewhite;
@@ -55,9 +52,7 @@ h4 {
 }
 
 #page-link {
-    /* list-style-type: none; */
     text-decoration: none;
-    /* color: antiquewhite; */
 }
 
 #page-link a:hover {
@@ -94,7 +89,6 @@ h4 {
     border-bottom: 2px solid #023047;
 }
 
-/* Introduction section */
 
 hr {
     border-bottom: 2px solid #023047;
@@ -139,7 +133,6 @@ hr {
     text-align: center;
 }
 
-/* Extra activities */
 
 #activities-times {
     margin-left: 10px;
@@ -172,7 +165,6 @@ hr {
     line-height: 150%;
 }
 
-/* Footer */
 
 footer {
     height: 100px;
@@ -195,7 +187,6 @@ footer {
 }
 
 
-/* News Page Style */
 
 #news-box {
     height: 500px;
@@ -220,7 +211,6 @@ footer {
     border-bottom: 2px solid #023047;
 }
 
-/* Galery Page Style*/
 
 #galery-page {
     clear: both;
@@ -234,7 +224,6 @@ footer {
     width: 100%;
 }
 
-/* Contact Us Page Style */
 
 #form-heading {
     color: antiquewhite;
@@ -312,9 +301,6 @@ footer {
     color: antiquewhite;
 }
 
-/* Media Queries */
-
-/* For larger to medium screens size from 1600px wide and down */
 
 @media screen and (max-width: 1600px) {
     hr {
@@ -333,7 +319,6 @@ footer {
     }
 }
 
-/* For larger to medium screens size from 1100px wide and down */
 
 @media screen and (max-width: 1100px) {
     .about-us {
@@ -344,7 +329,6 @@ footer {
     }
 }
 
-/* For small screen sizes below 800px width */
 
 @media screen and (max-width: 800px) {
     #logo {
@@ -376,7 +360,6 @@ footer {
     }
 }
 
-/* For small screen sizes below 420px width */
 
 @media screen and (max-width: 420px) {
     h2 {
@@ -413,4 +396,4 @@ footer {
     .send-button {
         left: 120px;
     }
-}
+} */

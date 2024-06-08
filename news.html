@@ -14,25 +14,151 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@1&family=Montserrat:wght@300&family=Open+Sans:ital@1&display=swap"
         rel="stylesheet">
-    <title>Briva Laika Pavadisanas Portals</title>
+    <title>Brīvā Laika Pavadīšanas Portāls</title>
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('assets/images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #hero {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        #logo {
+            font-family: 'Libre Bodoni', serif;
+            font-size: 2rem;
+            color: #5a8f7b;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #5a8f7b;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin: 0 15px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px 15px;
+            display: block;
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover,
+        .active-page {
+            background: #457c63;
+            border-radius: 5px;
+        }
+
+        .section-headings {
+            text-align: center;
+            font-size: 2rem;
+            color: #5a8f7b;
+            margin-top: 100px;
+            margin-bottom: 20px;
+        }
+
+        #news-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #news-box p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        #news-box a {
+            color: #5a8f7b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #news-box a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            background: #5a8f7b;
+            color: #fff;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        footer li {
+            margin: 0 10px;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        footer a:hover {
+            color: #ddd;
+        }
+    </style>
 </head>
+
 <body class="background-img">
     <!--Logo, menu linki-->
     <header>
         <div id="hero">
-            <a href="index.html" id="page-link">
-                <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i>
-                </h1>
-            </a>
+            <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i>
+            </h1>
         </div>
         <nav>
             <ul id="menu-link">
                 <li>
-                    <a href="index.html">Mājas</a>
+                    <a href="index.php">Mājas</a>
                 </li>
                 <li>
                     <a class="active-page" href="news.html">Jaunumi</a>
@@ -78,19 +204,13 @@
         <br>
         <ul>
             <li>
-                <a href="https://facebook.com" target="_blank" rel="noopener"
-                    aria-label="Apskatiet mūsu facebook lapu (opens in a new tab)"><i
-                        class="fa-brands fa-square-facebook"></i></a>
+                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu facebook lapu (opens in a new tab)"><i class="fa-brands fa-square-facebook"></i></a>
             </li>
             <li>
-                <a href="https://instagram.com" target="_blank" rel="noopener"
-                    aria-label="Apskatiet mūsu Instagram lapu (opens in a new tab)"><i
-                        class="fa-brands fa-square-instagram"></i></a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu Instagram lapu (opens in a new tab)"><i class="fa-brands fa-square-instagram"></i></a>
             </li>
             <li>
-                <a href="https://twitter.com" target="_blank" rel="noopener"
-                    aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i
-                        class="fa-brands fa-square-twitter"></i></a>
+                <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
             </li>
         </ul>
         <p> Atvainojiet! Mēs nevarējām atrast lapu, kuru meklējat!

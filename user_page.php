@@ -1,6 +1,6 @@
 <?php
 
-@include 'config.php';
+include 'config.php';
 
 session_start();
 
@@ -53,7 +53,7 @@ if(!isset($_SESSION['user_name'])){
         <nav>
             <ul id="menu-link">
                 <li>
-                    <a class="active-page" href="index.html">Mājas</a>
+                    <a class="active-page" href="index.php">Mājas</a>
                 </li>
                 <li>
                     <a href="news.html">Jaunumi</a>

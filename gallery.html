@@ -19,20 +19,155 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('assets/images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #hero {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        #logo {
+            font-family: 'Libre Bodoni', serif;
+            font-size: 2rem;
+            color: #5a8f7b;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #5a8f7b;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin: 0 15px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 10px 15px;
+            display: block;
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover,
+        .active-page {
+            background: #457c63;
+            border-radius: 5px;
+        }
+
+        #galery-page {
+            max-width: 80%;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .slides {
+            display: none;
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .active-slide {
+            display: block;
+            opacity: 1;
+        }
+
+        .controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        footer {
+            text-align: center;
+            background: #5a8f7b;
+            color: #fff;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        footer li {
+            margin: 0 10px;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        .section-headings {
+            text-align: center;
+            font-size: 2rem;
+            color: #5a8f7b;
+            margin-top: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
+
 <body class="background-img">
     <!--Logo, atteli,menu linki-->
     <header>
         <div id="hero">
-            <a href="index.html" id="page-link">
-                <h1 id="logo"><i class="fa-solid fa-tree"></i> Brīvā Laika Pavadīšanas Portāls <i class="fa-solid fa-person-walking"></i>
-                </h1>
-            </a>    
+            <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i>
+            </h1>
         </div>
         <nav>
             <ul id="menu-link">
                 <li>
-                    <a href="index.html">Mājas</a>
+                    <a href="index.php">Mājas</a>
                 </li>
                 <li>
                     <a href="news.html">Jaunumi</a>
@@ -46,28 +181,25 @@
             </ul>
         </nav>
     </header>
+    <!--Galery heading-->
+    <h2 class="section-headings">Galerija</h2>
     <!--Galery contents-->
     <section id="galery-page">
-        <img src="assets/images/Bambini-che-giocano-al-parco.webp"
-            alt="Kids playing with balloons outdoors in a beautiful green area.">
-        <img src="assets/images/boy-7056003_640.webp" alt="
-        Zēns trenējas futbolā ārā uz sintētiskā lauka.">
-        <img src="assets/images/coffee-1159011_640.webp"
-            alt="A cup with coffee on a saucer with a glass of tea with milk beside.">
-        <img src="assets/images/istockphoto-1353282196-612x612.webp" 
-        alt="bērni trenējas taekvondo.">
-        <img src="assets/images/istockphoto-1440503559-170667a.webp"
-            alt="Skaista, liela, zaļa teritorija saulainā dienā.">
-        <img src="assets/images/istockphoto-1456865386-612x612.webp" 
-            alt="Kungs un dāma, kas trenējas sporta zālē.">
-        <img src="assets/images/woman-2662237_640.webp" 
-            alt="Sieviete, kas nodarbojas ar jogu ārā, skaistā zaļā zonā.">
-        <img src="assets/images/zumba-4333580_640.webp" 
-            alt="Cilvēki, kas nodarbojas ar zumbu ārā skaistā saulainā dienā.">
-        <img src="assets/images/burlington-1541790_640.webp" 
-            alt="Bērni spēlējas iekštelpu atpūtas zonā.">
+        <img class="slides active-slide" src="assets/images/Bambini-che-giocano-al-parco.webp" alt="Kids playing with balloons outdoors in a beautiful green area.">
+        <img class="slides" src="assets/images/boy-7056003_640.webp" alt="Zēns trenējas futbolā ārā uz sintētiskā lauka.">
+        <img class="slides" src="assets/images/coffee-1159011_640.webp" alt="A cup with coffee on a saucer with a glass of tea with milk beside.">
+        <img class="slides" src="assets/images/istockphoto-1353282196-612x612.webp" alt="bērni trenējas taekvondo.">
+        <img class="slides" src="assets/images/istockphoto-1440503559-170667a.webp" alt="Skaista, liela, zaļa teritorija saulainā dienā.">
+        <img class="slides" src="assets/images/istockphoto-1456865386-612x612.webp" alt="Kungs un dāma, kas trenējas sporta zālē.">
+        <img class="slides" src="assets/images/woman-2662237_640.webp" alt="Sieviete, kas nodarbojas ar jogu ārā, skaistā zaļā zonā.">
+        <img class="slides" src="assets/images/zumba-4333580_640.webp" alt="Cilvēki, kas nodarbojas ar zumbu ārā skaistā saulainā dienā.">
+        <img class="slides" src="assets/images/burlington-1541790_640.webp" alt="Bērni spēlējas iekštelpu atpūtas zonā.">
+        <div class="controls">
+            <button class="control-btn" id="prev">&#10094;</button>
+            <button class="control-btn" id="next">&#10095;</button>
+        </div>
     </section>
-    <!--Address, laiks, kontacti and Socialie tikli-->
+    <!--Address, laiks, kontakti and Socialie tikli-->
     <footer id="new" class="social-media">
         <h4>Ventspils iela 50 k-4, Latvija</h4>
         <h4>+371 (124) 445 88</h4>
@@ -75,19 +207,13 @@
         <br>
         <ul>
             <li>
-                <a href="https://facebook.com" target="_blank" rel="noopener"
-                    aria-label="Apskatiet mūsu facebook lapu (opens in a new tab)"><i
-                        class="fa-brands fa-square-facebook"></i></a>
+                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu facebook lapu (opens in a new tab)"><i class="fa-brands fa-square-facebook"></i></a>
             </li>
             <li>
-                <a href="https://instagram.com" target="_blank" rel="noopener"
-                    aria-label="Apskatiet mūsu Instagram lapu (opens in a new tab)"><i
-                        class="fa-brands fa-square-instagram"></i></a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu Instagram lapu (opens in a new tab)"><i class="fa-brands fa-square-instagram"></i></a>
             </li>
             <li>
-                <a href="https://twitter.com" target="_blank" rel="noopener"
-                    aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i
-                        class="fa-brands fa-square-twitter"></i></a>
+                <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
             </li>
         </ul>
         <p> Atvainojiet! Mēs nevarējām atrast lapu, kuru meklējat!
@@ -97,6 +223,50 @@
 
     <!-- font awesome script-->
     <script src="https://kit.fontawesome.com/c2f4ffc429.js" crossorigin="anonymous"></script>
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".slides");
+        const prev = document.getElementById("prev");
+        const next = document.getElementById("next");
+
+        function showSlides() {
+            slides.forEach((slide, index) => {
+                slide.style.display = "none";
+            });
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+            slides[slideIndex - 1].style.opacity = 0;
+            setTimeout(() => {
+                slides[slideIndex - 1].style.opacity = 1;
+            }, 10);
+            setTimeout(showSlides, 10000); // Change image every 10 seconds
+        }
+
+        showSlides();
+
+        prev.addEventListener("click", () => {
+            slides[slideIndex - 1].style.display = "none";
+            slideIndex--;
+            if (slideIndex < 1) { slideIndex = slides.length }
+            slides[slideIndex - 1].style.display = "block";
+            slides[slideIndex - 1].style.opacity = 0;
+            setTimeout(() => {
+                slides[slideIndex - 1].style.opacity = 1;
+            }, 10);
+        });
+
+        next.addEventListener("click", () => {
+            slides[slideIndex - 1].style.display = "none";
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+            slides[slideIndex - 1].style.opacity = 0;
+            setTimeout(() => {
+                slides[slideIndex - 1].style.opacity = 1;
+            }, 10);
+        });
+    </script>
 </body>
 
 </html>
