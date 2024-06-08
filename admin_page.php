@@ -669,9 +669,7 @@ $users_result = mysqli_query($conn, $user_filter_query);
                 <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
             </li>
         </ul>
-        <p> Atvainojiet! Mēs nevarējām atrast lapu, kuru meklējat!
-            <a href="https://github.com/rvt-prog-kval-24/DP4-4-MatissSmits-BrivalaikaPavadisanasPortals.git/">Aplūkojiet mūsu galveno lapu</a>
-        </p>
+        
     </footer>
 
     <!-- font awesome script-->
