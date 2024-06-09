@@ -6,20 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BrivaLaikaPavadisanasPortals, Latvija">
-    <meta name="keywords" content="BrivaLaikaPavadisanasPortals, gym, SpeluLaukums, aktivitates, Latvija">
-
+    <meta name="keywords" content="BrivaLaikaPavadisanasPortals, gym, Spelulaukums, aktivitates, Latvija">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@1&family=Montserrat:wght@300&family=Open+Sans:ital@1&display=swap"
-        rel="stylesheet">
-    <title>Brīvā Laika Pavadīšanas Portāls</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@1&family=Montserrat:wght@300&family=Open+Sans:ital@1&display=swap" rel="stylesheet">
+    <title>Brīvā Laika Pavadīšanas Portāls - Rezervācija</title>
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
-
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -45,7 +41,6 @@
             font-family: 'Libre Bodoni', serif;
             font-size: 2rem;
             color: #5a8f7b;
-            animation: fadeInDown 1s ease-in-out;
         }
 
         nav {
@@ -88,7 +83,7 @@
             margin-bottom: 20px;
         }
 
-        #news-box {
+        #reservation-form {
             max-width: 800px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.9);
@@ -97,20 +92,54 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        #news-box p {
+        #reservation-form p {
             font-size: 1rem;
             line-height: 1.6;
             margin-bottom: 20px;
         }
 
-        #news-box a {
-            color: #5a8f7b;
-            text-decoration: none;
-            font-weight: bold;
+        #reservation-form form {
+            display: flex;
+            flex-direction: column;
         }
 
-        #news-box a:hover {
-            text-decoration: underline;
+        .line-box {
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .fill-out {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #tell-more {
+            flex-direction: column;
+        }
+
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .send-button {
+            padding: 10px 20px;
+            background: #5a8f7b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .send-button:hover {
+            background: #457c63;
         }
 
         footer {
@@ -152,8 +181,7 @@
     <!--Logo, menu linki-->
     <header>
         <div id="hero">
-            <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i>
-            </h1>
+            <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i></h1>
         </div>
         <nav>
             <ul id="menu-link">
@@ -161,7 +189,7 @@
                     <a href="index.php">Mājas</a>
                 </li>
                 <li>
-                    <a class="active-page" href="news.html">Jaunumi</a>
+                    <a href="news.html">Jaunumi</a>
                 </li>
                 <li>
                     <a href="gallery.html">Galerija</a>
@@ -170,36 +198,60 @@
                     <a href="contactus.html">Kontakti</a>
                 </li>
                 <li>
-                    <a href="reservation.html">Rezervācija</a>
+                    <a class="active-page" href="reservation.html">Rezervācija</a>
                 </li>
             </ul>
         </nav>
     </header>
     <br>
-    <!--Ziņu satura sadaļa-->
-    <section>
-        <h2 class="section-headings">Drīzumā!</h2>
+    <!--Rezervācijas sadaļa-->
+    <section id="reservation-form">
+        <h2 class="section-headings">Rezervācija</h2>
         <br>
-        <div id="news-box">
-            <p>Mūsu vasaras nometne tagad ir IESLĒGTA, no pirmdienas līdz piektdienai, nepilna laika vai pilna laika. Aktivitātes priekš
-                Juniori 5.-12. Bērni
-                tiek sadalīti grupās atbilstoši vecumam. <a href="contactus.html#form-heading">Nosūtiet mums ziņu</a> lai iegūtu vairāk informācijas. Vietas ir
-                ierobežots.
-            </p>
-            <br>
-            <p>Šeit mums ir milzīga zaļā zona, un mēs domājam, kā to izmantot daudz labāk
-                piknika veidošana
-                apgabalā. Lieliska jauna telpa jums un jūsu ģimenei. Vairāk informācijas drīzumā!
-            </p>
-            <br>
-            <p>
-                Domājot par iespējām, mēs paplašinām savus pakalpojumus. JM Akupunktūra nāk, lai ieviestu jauninājumus
-                telpa. Neaizmirstiet, ka dalībai ir 10% ATLAIDE visiem pakalpojumiem. Vairāk informācijas drīzumā!
-            </p>
-        </div>
-    </section>
+        <p>Lūdzu aizpildiet zemāk esošo veidlapu, lai rezervētu vietu mūsu aktivitātēm. Mēs sazināsimies ar jums, lai apstiprinātu jūsu rezervāciju.</p>
+        <form action="https://formdump.codeinstitute.net/" method="post">
+            <fieldset class="line-box">
+                <legend>Jūsu informācija</legend>
+                <label for="fname">Vārds</label>
+                <input class="fill-out" id="fname" name="fname" type="text" placeholder="Ierakstiet jusu vārdu" required>
+                <label for="sname">Uzvārds</label>
+                <input class="fill-out" id="sname" name="sname" type="text" placeholder="Ierakstiet savu uzvārdu" required>
+            </fieldset>
 
-    <!--Address, open time, contact and social media-->
+            <fieldset class="line-box">
+                <legend>Kontaktu informācija</legend>
+                <label for="nphone">Telefona numurs</label>
+                <input class="fill-out" id="nphone" name="nphone" type="tel" placeholder="Ierakstiet Jūsu telefona numuru" required pattern="\+?[0-9\s]+">
+                <label for="email">Email Adrese</label>
+                <input class="fill-out" id="email" name="email" type="email" placeholder="Ierakstiet Jūsu e-pasta adresi" required>
+            </fieldset>
+            
+            <fieldset class="line-box">
+                <legend>Rezervācijas informācija</legend>
+                <label for="activity">Aktivitāte</label>
+                <select class="fill-out" id="activity" name="activity" required>
+                    <option value="">Izvēlaties aktivitāti</option>
+                    <option value="gym">Gym</option>
+                    <option value="playground">Spēļu laukums</option>
+                    <option value="swimming">Peldēšana</option>
+                    <option value="yoga">Joga</option>
+                </select>
+                <label for="date">Datums</label>
+                <input class="fill-out" id="date" name="date" type="date" required>
+                <label for="time">Laiks</label>
+                <input class="fill-out" id="time" name="time" type="time" required>
+            </fieldset>
+            
+            <fieldset id="tell-more"  class="line-box">
+                <legend>Pastāstiet mums vairāk par savu rezervāciju</legend>
+                <label for="message"></label>
+                <br>
+                <textarea id="message" name="message" cols="80" rows="8" placeholder="Jūsu ziņa" required></textarea>
+            </fieldset>
+            <button class="send-button" type="submit"><strong>Nosūtīt</strong></button>
+        </form>
+    </section>
+    <!--Adrese, Laiks, kontakti sociālie tīkli-->
     <footer class="social-media">
         <h4>Ventspils iela 50 k-4, Latvija</h4>
         <h4>+371 (124) 445 88</h4>
@@ -216,7 +268,6 @@
                 <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
             </li>
         </ul>
-      
     </footer>
 
     <!-- font awesome script-->

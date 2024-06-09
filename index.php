@@ -241,6 +241,7 @@ foreach ($days as $day) {
                 <li><a href="gallery.html">Galerija</a></li>
                 <li><a href="contactus.html">Kontakti</a></li>
                 <li><a href="login_form.php">Login</a></li>
+                <li><a href="reservation.html">Rezervācija</a></li>
             </ul>
         </nav>
     </header>

@@ -271,7 +271,7 @@ if(isset($_POST['submit'])){
                 <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
             </li>
         </ul>
-      
+        
     </footer>
 
     <!-- font awesome script-->
