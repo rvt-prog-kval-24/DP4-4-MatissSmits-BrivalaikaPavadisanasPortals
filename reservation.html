@@ -16,6 +16,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="header.css">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -209,7 +212,7 @@
         <h2 class="section-headings">Rezervācija</h2>
         <br>
         <p>Lūdzu aizpildiet zemāk esošo veidlapu, lai rezervētu vietu mūsu aktivitātēm. Mēs sazināsimies ar jums, lai apstiprinātu jūsu rezervāciju.</p>
-        <form action="https://formdump.codeinstitute.net/" method="post">
+        <form action="process_reservation.php" method="post">
             <fieldset class="line-box">
                 <legend>Jūsu informācija</legend>
                 <label for="fname">Vārds</label>
