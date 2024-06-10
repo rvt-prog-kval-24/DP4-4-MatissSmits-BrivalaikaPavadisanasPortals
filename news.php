@@ -1,3 +1,8 @@
+<?php
+include 'config.php';
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -161,17 +166,27 @@
                     <a href="index.php">Mājas</a>
                 </li>
                 <li>
-                    <a class="active-page" href="news.html">Jaunumi</a>
+                    <a class="active-page" href="news.php">Jaunumi</a>
                 </li>
                 <li>
-                    <a href="gallery.html">Galerija</a>
+                    <a href="gallery.php">Galerija</a>
                 </li>
                 <li>
-                    <a href="contactus.html">Kontakti</a>
+                    <a href="contactus.php">Kontakti</a>
                 </li>
                 <li>
-                    <a href="reservation.html">Rezervācija</a>
+                    <a href="reservation.php">Rezervācija</a>
                 </li>
+                <?php if(isset($_SESSION['user_name'])): ?>
+                    <?php if($_SESSION['user_type'] == 'admin'): ?>
+                        <li><a href="admin_page.php">Admin</a></li>
+                    <?php else: ?>
+                        <li><a href="profile.php">Profile</a></li>
+                    <?php endif; ?>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="login_form.php">Login</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>

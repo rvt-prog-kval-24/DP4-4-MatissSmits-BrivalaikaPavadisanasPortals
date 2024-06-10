@@ -1,7 +1,6 @@
 <?php
 
 include 'config.php';
-
 session_start();
 
 if(isset($_POST['submit'])){
@@ -17,18 +16,16 @@ if(isset($_POST['submit'])){
 
       $row = mysqli_fetch_array($result);
 
+      $_SESSION['user_name'] = $row['name'];
+      $_SESSION['user_id'] = $row['id'];
+      $_SESSION['user_type'] = $row['user_type'];
+
       if($row['user_type'] == 'admin'){
-
-         $_SESSION['admin_name'] = $row['name'];
-         header('location:admin_page.php');
-
-      }elseif($row['user_type'] == 'user'){
-
-         $_SESSION['user_name'] = $row['name'];
-         header('location:user_page.php');
-
+         header('location:index.php');
+      }else{
+         header('location:index.php');
       }
-     
+
    }else{
       $error[] = 'Nepareiza parole vai e-pasts!';
    }
@@ -113,6 +110,7 @@ if(isset($_POST['submit'])){
             background: #457c63;
             border-radius: 5px;
         }
+
        .form-container {
            display: flex;
            justify-content: center;
@@ -224,14 +222,27 @@ if(isset($_POST['submit'])){
                     <a href="index.php">Mājas</a>
                 </li>
                 <li>
-                    <a href="news.html">Jaunumi</a>
+                    <a href="news.php">Jaunumi</a>
                 </li>
                 <li>
-                    <a href="gallery.html">Galerija</a>
+                    <a href="gallery.php">Galerija</a>
                 </li>
                 <li>
-                    <a href="contactus.html">Kontakti</a>
+                    <a href="contactus.php">Kontakti</a>
                 </li>
+                <li>
+                    <a href="reservation.php">Rezervācija</a>
+                </li>
+                <?php if(isset($_SESSION['user_name'])): ?>
+                    <?php if($_SESSION['user_type'] == 'admin'): ?>
+                        <li><a href="admin_panel.php">Admin</a></li>
+                    <?php else: ?>
+                        <li><a href="profile.php">Profile</a></li>
+                    <?php endif; ?>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="login_form.php">Login</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>
@@ -271,7 +282,6 @@ if(isset($_POST['submit'])){
                 <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
             </li>
         </ul>
-        
     </footer>
 
     <!-- font awesome script-->

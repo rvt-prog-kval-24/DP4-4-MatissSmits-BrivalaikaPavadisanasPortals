@@ -1,7 +1,8 @@
 <?php
 include 'config.php';
+session_start();
 
-$days = ['Svētdiena', 'Pirmdiena', 'Otradiena', 'Trešdiena', 'Ceturtdiena', 'Piektdiena', 'Sestdiena'];
+$days = ['Pirmdiena', 'Otradiena', 'Trešdiena', 'Ceturtdiena', 'Piektdiena', 'Sestdiena', 'Svētdiena'];
 $activities = [];
 
 foreach ($days as $day) {
@@ -16,7 +17,6 @@ foreach ($days as $day) {
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BrivaLaikaPavadisanasPortals, Latvija">
     <meta name="keywords" content="BrivaLaikaPavadisanasPortals, gym, SpeluLaukums, aktivitates, Latvija">
@@ -163,8 +163,28 @@ foreach ($days as $day) {
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            min-width: 150px;
+            min-width: 250px;
             text-align: center;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .times:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(90, 143, 123, 0.7);
+        }
+
+        .activity-info {
+            margin-bottom: 10px;
+        }
+
+        .available-slots {
+            position: relative;
+            background: #5a8f7b;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
         }
 
         footer {
@@ -231,17 +251,25 @@ foreach ($days as $day) {
     <!--Logo, Foto and menu linki-->
     <header>
         <div id="hero">
-            <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i>
-            </h1>
+            <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i></h1>
         </div>
         <nav>
             <ul id="menu-link">
-                <li><a class="active-page" href="index.php">Mājas</a></li>
-                <li><a href="news.html">Jaunumi</a></li>
-                <li><a href="gallery.html">Galerija</a></li>
-                <li><a href="contactus.html">Kontakti</a></li>
-                <li><a href="login_form.php">Login</a></li>
-                <li><a href="reservation.html">Rezervācija</a></li>
+                <li><a href="index.php">Mājas</a></li>
+                <li><a href="news.php">Jaunumi</a></li>
+                <li><a href="gallery.php">Galerija</a></li>
+                <li><a href="contactus.php">Kontakti</a></li>
+                <li><a href="reservation.php">Rezervācija</a></li>
+                <?php if(isset($_SESSION['user_name'])): ?>
+                    <?php if($_SESSION['user_type'] == 'admin'): ?>
+                        <li><a href="admin_page.php">Admin</a></li>
+                    <?php else: ?>
+                        <li><a href="profile.php">Profile</a></li>
+                    <?php endif; ?>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="login_form.php">Login</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>
@@ -250,7 +278,7 @@ foreach ($days as $day) {
     <h2 class="section-headings">Perfekta vieta priekš Jums!</h2>
     <br>
     <section>
-        <p id="intro">Briva Laika Pavadisanas Portals tika izveidota ar misiju motivēt ģimenes praktizēt vingrinājumus. Jums nav jāuztraucas par to, kurš iebildīs pret bērniem, kamēr jūs veicat savus vingrinājumus, vai par to, ko jūs darīsit, kamēr bērni veiks savus vingrinājumus aktivitātes. Šeit ir aktivitātes ikvienam (bērniem, kas vecāki par 5 gadiem). <a href="contactus.html">Kontakti</a> lai iegūtu papildinformāciju par mūsu pakalpojumiem un dalību, vai vienkārši rezervējiet savus laika nišas, un strādāsim ārā!</p>
+        <p id="intro">Briva Laika Pavadisanas Portals tika izveidota ar misiju motivēt ģimenes praktizēt vingrinājumus. Jums nav jāuztraucas par to, kurš iebildīs pret bērniem, kamēr jūs veicat savus vingrinājumus, vai par to, ko jūs darīsit, kamēr bērni veiks savus vingrinājumus aktivitātes. Šeit ir aktivitātes ikvienam (bērniem, kas vecāki par 5 gadiem). <a href="contactus.php">Kontakti</a> lai iegūtu papildinformāciju par mūsu pakalpojumiem un dalību, vai vienkārši rezervējiet savus laika nišas, un strādāsim ārā!</p>
         <br>
         <div class="about-us-container">
             <div class="about-us">
@@ -282,8 +310,11 @@ foreach ($days as $day) {
             echo "<h3>$day</h3>";
             if (!empty($activities[$day])) {
                 foreach ($activities[$day] as $activity) {
+                    echo "<div class='activity-info'>";
                     echo "<h4>{$activity['activity']}</h4>";
-                    echo "<h4>{$activity['time']}</h4>";
+                    echo "<p>Laiks: {$activity['time']}</p>";
+                    echo "<p class='available-slots'>Pieejamās vietas: {$activity['available_slots']}</p>";
+                    echo "</div>";
                 }
             } else {
                 echo "<h4>Šajā dienā nav aktivitāšu</h4>";
@@ -309,7 +340,6 @@ foreach ($days as $day) {
                 <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
             </li>
         </ul>
-       
     </footer>
 
     <!-- font awesome script-->

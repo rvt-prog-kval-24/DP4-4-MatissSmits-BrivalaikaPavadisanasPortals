@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+session_start();
 
 $sql = "SELECT r.id, r.user, a.name as activity, r.date, r.time FROM reservations r JOIN activities a ON r.activity_id = a.id";
 $result = $conn->query($sql);

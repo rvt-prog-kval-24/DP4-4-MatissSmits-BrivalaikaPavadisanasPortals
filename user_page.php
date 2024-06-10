@@ -56,13 +56,13 @@ if(!isset($_SESSION['user_name'])){
                     <a class="active-page" href="index.php">Mājas</a>
                 </li>
                 <li>
-                    <a href="news.html">Jaunumi</a>
+                    <a href="news.php">Jaunumi</a>
                 </li>
                 <li>
-                    <a href="gallery.html">Galerija</a>
+                    <a href="gallery.php">Galerija</a>
                 </li>
                 <li>
-                    <a href="contactus.html">Kontakti</a>
+                    <a href="contactus.php">Kontakti</a>
 
                 </li>
                 <li>

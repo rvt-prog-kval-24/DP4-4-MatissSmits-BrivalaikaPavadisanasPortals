@@ -1,13 +1,17 @@
 <?php
-@include 'config.php';
+include 'config.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
-    $id = $_POST['id'];
+$response = ['status' => 'error', 'message' => 'Kļūda dzēšot aktivitāti!'];
+
+if (isset($_POST['id'])) {
+    $id = mysqli_real_escape_string($conn, $_POST['id']);
     $delete = "DELETE FROM activities WHERE id = $id";
+    
     if (mysqli_query($conn, $delete)) {
-        echo 'success';
-    } else {
-        echo 'error';
+        $response['status'] = 'success';
+        $response['message'] = 'Aktivitāte dzēsta veiksmīgi!';
     }
 }
+
+echo json_encode($response);
 ?>

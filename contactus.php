@@ -1,3 +1,9 @@
+<?php
+include 'config.php';
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,19 +12,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BrivaLaikaPavadisanasPortals, Latvija">
-    <meta name="keywords" content="BrivaLaikaPavadisanasPortals, gym, Spelulaukums, aktivitates, Latvija">
+    <meta name="keywords" content="BrivaLaikaPavadisanasPortals, gym, Spelulaukums, aktivitates, latvija">
+
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@1&family=Montserrat:wght@300&family=Open+Sans:ital@1&display=swap" rel="stylesheet">
-    <title>Brīvā Laika Pavadīšanas Portāls - Rezervācija</title>
+    <title>Briva Laika Pavadisanas Portals</title>
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="admin.css">
-    <link rel="stylesheet" href="header.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../BrivalaikaPavadisanasPortals/assets/images/BrivalaikaPavadisanasPortals/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../BrivalaikaPavadisanasPortals/assets/images/BrivalaikaPavadisanasPortals/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../BrivalaikaPavadisanasPortals/assets/images/BrivalaikaPavadisanasPortals/favicon-16x16.png">
+
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -44,6 +49,7 @@
             font-family: 'Libre Bodoni', serif;
             font-size: 2rem;
             color: #5a8f7b;
+            animation: fadeInDown 1s ease-in-out;
         }
 
         nav {
@@ -82,11 +88,9 @@
             text-align: center;
             font-size: 2rem;
             color: #5a8f7b;
-            margin-top: 100px;
-            margin-bottom: 20px;
         }
 
-        #reservation-form {
+        #contact-us {
             max-width: 800px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.9);
@@ -95,13 +99,22 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        #reservation-form p {
+        #contact-us p {
             font-size: 1rem;
             line-height: 1.6;
             margin-bottom: 20px;
         }
 
-        #reservation-form form {
+        #contact-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #contact-form {
             display: flex;
             flex-direction: column;
         }
@@ -184,7 +197,8 @@
     <!--Logo, menu linki-->
     <header>
         <div id="hero">
-            <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i></h1>
+            <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i>
+            </h1>
         </div>
         <nav>
             <ul id="menu-link">
@@ -192,27 +206,45 @@
                     <a href="index.php">Mājas</a>
                 </li>
                 <li>
-                    <a href="news.html">Jaunumi</a>
+                    <a href="news.php">Jaunumi</a>
                 </li>
                 <li>
-                    <a href="gallery.html">Galerija</a>
+                    <a href="gallery.php">Galerija</a>
                 </li>
                 <li>
-                    <a href="contactus.html">Kontakti</a>
+                    <a class="active-page" href="contactus.php">Kontakti</a>
                 </li>
                 <li>
-                    <a class="active-page" href="reservation.html">Rezervācija</a>
+                    <a href="reservation.php">Rezervācija</a>
                 </li>
+                <?php if(isset($_SESSION['user_name'])): ?>
+                    <?php if($_SESSION['user_type'] == 'admin'): ?>
+                        <li><a href="admin_page.php">Admin</a></li>
+                    <?php else: ?>
+                        <li><a href="profile.php">Profile</a></li>
+                    <?php endif; ?>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="login_form.php">Login</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>
     <br>
-    <!--Rezervācijas sadaļa-->
-    <section id="reservation-form">
-        <h2 class="section-headings">Rezervācija</h2>
+    <!--Kontakti-->
+    <section id="contact-us">
+        <h2 class="section-headings">Kontakti</h2>
         <br>
-        <p>Lūdzu aizpildiet zemāk esošo veidlapu, lai rezervētu vietu mūsu aktivitātēm. Mēs sazināsimies ar jums, lai apstiprinātu jūsu rezervāciju.</p>
-        <form action="process_reservation.php" method="post">
+        <p>Mums ir svarīgi, lai mūsu klienti tiktu atjaunināti. Ja jums ir kādi jautājumi vai vēlaties iegūt vairāk informācijas
+            par mūsu aktivitātēm vai dalību, lūdzu, sazinieties ar mums, izmantojot tālāk esošo veidlapu. Atkārtojumi tiek veikti kā
+            drīzumā
+            pēc iespējas. Aicinām arī zvanīt. Mēs esam šeit no pirmdienas līdz piektdienai no 07:00 līdz 22:00, ieskaitot banku
+            brīvdienas.</p>
+    </section>
+    <br>
+    <section id="contact-box">
+        <form id="contact-form" action="https://formdump.codeinstitute.net/" method="post">
+            <h3 id="form-heading">Nosūtiet mums ziņu</h3>
             <fieldset class="line-box">
                 <legend>Jūsu informācija</legend>
                 <label for="fname">Vārds</label>
@@ -228,28 +260,23 @@
                 <label for="email">Email Adrese</label>
                 <input class="fill-out" id="email" name="email" type="email" placeholder="Ierakstiet Jūsu e-pasta adresi" required>
             </fieldset>
-            
             <fieldset class="line-box">
-                <legend>Rezervācijas informācija</legend>
-                <label for="activity">Aktivitāte</label>
-                <select class="fill-out" id="activity" name="activity" required>
-                    <option value="">Izvēlaties aktivitāti</option>
-                    <option value="gym">Gym</option>
-                    <option value="playground">Spēļu laukums</option>
-                    <option value="swimming">Peldēšana</option>
-                    <option value="yoga">Joga</option>
-                </select>
-                <label for="date">Datums</label>
-                <input class="fill-out" id="date" name="date" type="date" required>
-                <label for="time">Laiks</label>
-                <input class="fill-out" id="time" name="time" type="time" required>
+                <legend>Uz ko attiecas jūsu vaicājums</legend>
+                <label for="info-list"></label>
+                <input class="fill-out" type="text" id="info-list" list="info" name="vairak-info" placeholder="Izvēlaties tēmu" required>
+                <datalist id="info">
+                    <option value="Extra-Aktivitates"></option>
+                    <option value="Gym"></option>
+                    <option value="Dalība"></option>
+                    <option value="Vasaras-kempings"></option>
+                    <option value="Citi"></option>
+                </datalist>
             </fieldset>
-            
             <fieldset id="tell-more"  class="line-box">
-                <legend>Pastāstiet mums vairāk par savu rezervāciju</legend>
-                <label for="message"></label>
+                <legend>Pastāstiet mums vairāk par savu vaicājumu</legend>
+                <label for="query-form"></label>
                 <br>
-                <textarea id="message" name="message" cols="80" rows="8" placeholder="Jūsu ziņa" required></textarea>
+                <textarea id="query-form" name="query-form" cols="80" rows="8" placeholder="Jūsu ziņa" required></textarea>
             </fieldset>
             <button class="send-button" type="submit"><strong>Nosūtīt</strong></button>
         </form>
@@ -271,6 +298,7 @@
                 <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
             </li>
         </ul>
+       
     </footer>
 
     <!-- font awesome script-->

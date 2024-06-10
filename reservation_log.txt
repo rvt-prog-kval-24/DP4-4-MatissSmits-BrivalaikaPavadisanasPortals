@@ -1,0 +1,6 @@
+Starting reservation process for user ID: 1, Activity ID: 8, Date: 2024-06-10
+User has already reserved a spot for this activity on this date.
+Starting reservation process for user ID: 1, Activity ID: 16, Date: 2024-06-10
+Activity found: {"id":"16","day":"Pirmdiena","activity":"Dejo\u0161ana","time":"15:00-17:00","max_slots":"30","available_slots":"30"}
+Reservation inserted successfully.
+Available slots updated successfully.

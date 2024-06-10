@@ -1,36 +1,56 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "user_db";
+include 'config.php';
+session_start();
 
-// Izveidot savienojumu
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Pārbaudīt savienojumu
-if ($conn->connect_error) {
-    die("Savienojuma kļūda: " . $conn->connect_error);
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login_form.php');
+    exit();
 }
 
-// Iegūt datus no veidlapas
-$first_name = $_POST['fname'];
-$last_name = $_POST['sname'];
-$phone_number = $_POST['nphone'];
-$email = $_POST['email'];
-$activity = $_POST['activity'];
-$reservation_date = $_POST['date'];
-$reservation_time = $_POST['time'];
-$message = $_POST['message'];
+$user_id = $_SESSION['user_id'];
+$activity_id = mysqli_real_escape_string($conn, $_POST['activity_id']);
+$message = mysqli_real_escape_string($conn, $_POST['message']);
+$reservation_date = date('Y-m-d');
 
-// Sagatavot SQL vaicājumu
-$sql = "INSERT INTO reservations (first_name, last_name, phone_number, email, activity, reservation_date, reservation_time, message) 
-VALUES ('$first_name', '$last_name', '$phone_number', '$email', '$activity', '$reservation_date', '$reservation_time', '$message')";
+// Check if the user has already reserved this activity on the same date
+$check_query = "SELECT * FROM reservations WHERE user_id = $user_id AND activity_id = $activity_id AND reservation_date = '$reservation_date'";
+$check_result = mysqli_query($conn, $check_query);
 
-if ($conn->query($sql) === TRUE) {
-    echo "Rezervācija veiksmīgi saglabāta!";
+if (mysqli_num_rows($check_result) > 0) {
+    $_SESSION['error'] = 'Jūs jau esat rezervējis šo aktivitāti šajā datumā.';
+    header('Location: reservation.php');
+    exit();
+}
+
+// Fetch the available slots for the activity
+$activity_query = "SELECT available_slots FROM activities WHERE id = $activity_id";
+$activity_result = mysqli_query($conn, $activity_query);
+$activity = mysqli_fetch_assoc($activity_result);
+
+if (!$activity) {
+    $_SESSION['error'] = 'Aktivitāte nav atrasta.';
+    header('Location: reservation.php');
+    exit();
+}
+
+if ($activity['available_slots'] <= 0) {
+    $_SESSION['error'] = 'Nav pieejamu vietu šai aktivitātei.';
+    header('Location: reservation.php');
+    exit();
+}
+
+// Insert the reservation
+$reserve_query = "INSERT INTO reservations (user_id, activity_id, message, reservation_date) VALUES ($user_id, $activity_id, '$message', '$reservation_date')";
+if (mysqli_query($conn, $reserve_query)) {
+    // Decrement the available slots
+    $update_slots_query = "UPDATE activities SET available_slots = available_slots - 1 WHERE id = $activity_id";
+    mysqli_query($conn, $update_slots_query);
+    
+    $_SESSION['message'] = 'Rezervācija veiksmīga.';
 } else {
-    echo "Kļūda: " . $sql . "<br>" . $conn->error;
+    $_SESSION['error'] = 'Kļūda veicot rezervāciju.';
 }
 
-$conn->close();
+header('Location: reservation.php');
+exit();
 ?>

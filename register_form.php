@@ -1,38 +1,35 @@
 <?php
-
 include 'config.php';
+session_start();
 
 if(isset($_POST['submit'])){
 
    $name = mysqli_real_escape_string($conn, $_POST['name']);
+   $surname = mysqli_real_escape_string($conn, $_POST['surname']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
+   $phone = mysqli_real_escape_string($conn, $_POST['phone']);
    $pass = md5($_POST['password']);
    $cpass = md5($_POST['cpassword']);
    $user_type = $_POST['user_type'];
 
-   $select = " SELECT * FROM user_form WHERE email = '$email' && password = '$pass' ";
+   $select = "SELECT * FROM user_form WHERE email = '$email'";
 
    $result = mysqli_query($conn, $select);
 
    if(mysqli_num_rows($result) > 0){
-
       $error[] = 'lietotājs jau eksistē!';
-
    }else{
-
       if($pass != $cpass){
          $error[] = 'parole nesakrīt!';
       }else{
-         $insert = "INSERT INTO user_form(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
+         $insert = "INSERT INTO user_form(name, surname, email, phone, password, user_type) VALUES('$name', '$surname', '$email', '$phone', '$pass', '$user_type')";
          mysqli_query($conn, $insert);
          header('location:login_form.php');
       }
    }
-
 };
-
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -234,14 +231,24 @@ if(isset($_POST['submit'])){
                     <a href="index.php">Mājas</a>
                 </li>
                 <li>
-                    <a href="news.html">Jaunumi</a>
+                    <a href="news.php">Jaunumi</a>
                 </li>
                 <li>
-                    <a href="gallery.html">Galerija</a>
+                    <a href="gallery.php">Galerija</a>
                 </li>
                 <li>
-                    <a href="contactus.html">Kontakti</a>
+                    <a href="contactus.php">Kontakti</a>
                 </li>
+                <?php if(isset($_SESSION['user_name'])): ?>
+                    <?php if($_SESSION['user_type'] == 'admin'): ?>
+                        <li><a href="admin_page.php">Admin</a></li>
+                    <?php else: ?>
+                        <li><a href="profile.php">Profile</a></li>
+                    <?php endif; ?>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="login_form.php">Login</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>
@@ -258,7 +265,9 @@ if(isset($_POST['submit'])){
             };
             ?>
             <input class="fill-out" type="text" name="name" required placeholder="Ievadiet Jūsu vārdu">
+            <input class="fill-out" type="text" name="surname" required placeholder="Ievadiet Jūsu uzvārdu">
             <input class="fill-out" type="email" name="email" required placeholder="Ievadiet Jūsu e-pastu">
+            <input class="fill-out" type="text" name="phone" required placeholder="Ievadiet Jūsu telefona numuru">
             <input class="fill-out" type="password" name="password" required placeholder="Ievadiet Jūsu paroli">
             <input class="fill-out" type="password" name="cpassword" required placeholder="Ievadiet Jūsu atkārtoto paroli">
             <select class="fill-out" name="user_type">
