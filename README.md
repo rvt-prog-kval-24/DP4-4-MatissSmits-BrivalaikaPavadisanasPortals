@@ -3,66 +3,38 @@
 ## Par projektu
 
 Brīvā laika pavadīšanas portāls ir tīmekļa vietne, kas piedāvā plašu aktivitāšu klāstu, lai palīdzētu lietotājiem atrast un piedalīties dažādās brīvā laika aktivitātēs, piemēram, teikvando un judo treniņos. Portāls ir piemērots dažādu vecuma grupu cilvēkiem un piedāvā aktivitātes gan bērniem, gan pieaugušajiem. 
-
-## Funkcijas
-
-Projekts ietver sekojošas galvenās funkcijas:
-
-- **Reģistrācija (register):** Lietotāji var reģistrēties, ievadot savu lietotājvārdu, paroli un e-pasta adresi.
-- **Pieteikšanās (login):** Reģistrētie lietotāji var pieteikties, ievadot savu lietotājvārdu vai e-pasta adresi un paroli.
-- **Izrakstīšanās (logout):** Lietotāji var izrakstīties no sava konta.
-- **Produktu apskate (view products):** Lietotāji var apskatīt pieejamās aktivitātes un produktus ar aprakstiem un cenām.
-- **Produktu pievienošana (add products):** Administratori var pievienot jaunus produktus un aktivitātes.
-- **Produktu rediģēšana un dzēšana (edit/delete products):** Administratori var rediģēt vai dzēst esošos produktus.
-- **Rezervāciju veikšana (make reservation):** Lietotāji var veikt rezervācijas uz pieejamajām aktivitātēm.
-- **Rezervāciju apskate (view reservations):** Lietotāji un administratori var apskatīt rezervāciju sarakstu.
-- **Rezervāciju pārvaldība (manage reservations):** Administratori var apstiprināt vai noraidīt rezervācijas.
-
-## Projekta mērķi
-
-- Nodrošināt ērtu un efektīvu veidu, kā lietotāji var atrast un rezervēt brīvā laika aktivitātes.
-- Piedāvāt plašu aktivitāšu klāstu, kas piemērots dažādu vecuma grupu cilvēkiem.
-- Nodrošināt administratoriem rīkus, lai pārvaldītu aktivitātes un lietotāju rezervācijas.
-
 ## Tehnoloģijas
 
 Projekts ir izstrādāts, izmantojot sekojošas tehnoloģijas:
 
-- **HTML/CSS/JavaScript:** Lietotāja interfeisa izstrādei.
+- **HTML/CSS/PHP:** Lietotāja interfeisa izstrādei.
 - **PHP:** Servera puses loģikai un datu apstrādei.
-- **Laravel:** PHP ietvars, kas nodrošina strukturētu un efektīvu koda izstrādi.
-- **MySQL:** Relāciju datu bāze, kas nodrošina efektīvu datu uzglabāšanu un piekļuvi.
-- **React:** JavaScript bibliotēka lietotāja interfeisa komponentiem.
+- **MySQL/MYPHPADMIN:** Relāciju datu bāze, kas nodrošina efektīvu datu uzglabāšanu un piekļuvi.
 
-## Datu bāzes struktūra
+## Izmantotie avoti
 
-Projekta datu bāze ietver šādas tabulas:
+1.   https://www.phpmyadmin.net/ 
+2.   https://www.w3schools.com/html/default.asp 
+3.   https://www.w3schools.com/html/html_css.asp 
+4.   https://www.w3schools.com/php/php_echo_print.asp 
+5.   https://www.w3schools.com/php/php_if_else.asp 
+6.   https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model 
+7.   https://en.wikipedia.org/wiki/SQL#SQL_data_types 
+8.   https://e.rvt.lv/mod/resource/view.php?id=19115 
 
-- **Users:** Satur lietotāju informāciju (ID, vārds, e-pasta adrese, parole, loma).
-- **Products:** Satur informāciju par piedāvātajiem produktiem un aktivitātēm (ID, nosaukums, apraksts, cena).
-- **Reservations:** Satur informāciju par lietotāju veiktajām rezervācijām (ID, lietotāja ID, produkta ID, rezervācijas datums, statuss).
+## Uzstādīšanas insturkcijas
 
-## Lietošanas piemēri
+1.   Lai lietotu git lejupielādējam Git for windows
+2.   Instalējam git.
+3.   Lejupielādējam WAMP, lai varētu izveidot webserveri.
+4.   Instalējam WAMP.
+5.   Pārliecinamies par WAMP darbību atverot adresi http://127.0.0.1
+6.   Dodamies uz WAMP atrašanās vietu parasti c:\wamp\www un izdzēšam tā saturu.
+7.   Veicam labo klikšķi un izvēlamies opciju "git bash here" un izpildam zemāk raksīto komandu.
+git clone https://github.com/rvt-prog-kval-24/DP4-4-MatissSmits-BrivalaikaPavadisanasPortals.git
+9.   Atveram adresi http://127.0.0.1/DP4-4-MatissSmits-BrivaLaikaPavadisanasPortals/
 
-1. **Reģistrācija:**
-   - Lietotājs aizpilda reģistrācijas formu ar lietotājvārdu, paroli un e-pasta adresi.
-   - Sistēma validē ievadīto informāciju un nosūta apstiprinājuma e-pastu.
 
-2. **Pieteikšanās:**
-   - Lietotājs ievada pieteikšanās informāciju.
-   - Sistēma autentificē lietotāju un piešķir piekļuvi kontam.
-
-3. **Produktu pievienošana:**
-   - Administrators aizpilda produkta pievienošanas formu.
-   - Sistēma validē ievadīto informāciju un saglabā to datu bāzē.
-
-4. **Rezervācijas veikšana:**
-   - Lietotājs izvēlas produktu un norāda rezervācijas datumu.
-   - Sistēma validē ievadīto informāciju un saglabā rezervāciju datu bāzē.
-
-## Autori
-
-- **Matīss Šmits** - Projekta izstrādātājs
 
 
 
