@@ -10,7 +10,7 @@ if(isset($_POST['submit'])){
    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
    $pass = md5($_POST['password']);
    $cpass = md5($_POST['cpassword']);
-   $user_type = $_POST['user_type'];
+   $user_type = 'user'; // Always set user_type to 'user'
 
    $select = "SELECT * FROM user_form WHERE email = '$email'";
 
@@ -29,7 +29,6 @@ if(isset($_POST['submit'])){
    }
 };
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -147,14 +146,6 @@ if(isset($_POST['submit'])){
             border: 1px solid #ccc;
         }
 
-        form select {
-            width: 100%;
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
         form .form-btn {
             padding: 10px 20px;
             background: #5a8f7b;
@@ -221,9 +212,8 @@ if(isset($_POST['submit'])){
 <body>
     <!--Logo, menu linki-->
     <header>
-    <div id="hero">
-            <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i>
-            </h1>
+        <div id="hero">
+            <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i></h1>
         </div>
         <nav>
             <ul id="menu-link">
@@ -270,10 +260,6 @@ if(isset($_POST['submit'])){
             <input class="fill-out" type="text" name="phone" required placeholder="Ievadiet Jūsu telefona numuru">
             <input class="fill-out" type="password" name="password" required placeholder="Ievadiet Jūsu paroli">
             <input class="fill-out" type="password" name="cpassword" required placeholder="Ievadiet Jūsu atkārtoto paroli">
-            <select class="fill-out" name="user_type">
-                <option value="user">Lietotājs</option>
-                <option value="admin">Administrators</option>
-            </select>
             <input class="form-btn" type="submit" name="submit" value="Reģistrēties">
             <p>Jau ir profils? <a href="login_form.php">Pieslēgties</a></p>
         </form>
@@ -296,7 +282,6 @@ if(isset($_POST['submit'])){
                 <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
             </li>
         </ul>
-        
     </footer>
 
     <!-- font awesome script-->

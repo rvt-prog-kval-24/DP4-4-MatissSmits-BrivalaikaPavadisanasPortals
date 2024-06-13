@@ -1,6 +1,11 @@
 <?php
 include 'config.php';
 session_start();
+
+// Fetch the first news content
+$news_query = "SELECT content FROM news_content ORDER BY id ASC LIMIT 1";
+$news_result = mysqli_query($conn, $news_query);
+$news = mysqli_fetch_assoc($news_result);
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +21,8 @@ session_start();
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@1&family=Montserrat:wght@300&family=Open+Sans:ital@1&display=swap"
-        rel="stylesheet">
-    <title>Brīvā Laika Pavadīšanas Portāls</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@1&family=Montserrat:wght@300&family=Open+Sans:ital@1&display=swap" rel="stylesheet">
+    <title>Jaunumi</title>
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
@@ -31,32 +34,29 @@ session_start();
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background: url('assets/images/background.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background: #f7f7f7;
             color: #333;
         }
 
         header {
-            background: rgba(255, 255, 255, 0.8);
+            background: #5a8f7b;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        #hero {
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        #logo {
+        header h1 {
             font-family: 'Libre Bodoni', serif;
-            font-size: 2rem;
-            color: #5a8f7b;
-            animation: fadeInDown 1s ease-in-out;
+            font-size: 2.5rem;
+            margin: 0;
         }
 
         nav {
             display: flex;
             justify-content: center;
-            background: #5a8f7b;
+            background: #457c63;
+            padding: 10px 0;
         }
 
         nav ul {
@@ -81,7 +81,7 @@ session_start();
 
         nav a:hover,
         .active-page {
-            background: #457c63;
+            background: #335c4a;
             border-radius: 5px;
         }
 
@@ -89,22 +89,21 @@ session_start();
             text-align: center;
             font-size: 2rem;
             color: #5a8f7b;
-            margin-top: 100px;
-            margin-bottom: 20px;
+            margin: 40px 0 20px;
         }
 
         #news-box {
             max-width: 800px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
+            background: #fff;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         #news-box p {
-            font-size: 1rem;
-            line-height: 1.6;
+            font-size: 1.1rem;
+            line-height: 1.8;
             margin-bottom: 20px;
         }
 
@@ -125,8 +124,8 @@ session_start();
             padding: 20px;
             position: relative;
             bottom: 0;
+            width: 100%;
             box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
         }
 
         footer ul {
@@ -153,68 +152,51 @@ session_start();
     </style>
 </head>
 
-<body class="background-img">
-    <!--Logo, menu linki-->
+<body>
+    <!-- Logo, menu links -->
     <header>
-        <div id="hero">
-            <h1 id="logo"><i class="fa-solid fa-tree"></i> Briva Laika Pavadisanas Portals <i class="fa-solid fa-person-walking"></i>
-            </h1>
-        </div>
-        <nav>
-            <ul id="menu-link">
-                <li>
-                    <a href="index.php">Mājas</a>
-                </li>
-                <li>
-                    <a class="active-page" href="news.php">Jaunumi</a>
-                </li>
-                <li>
-                    <a href="gallery.php">Galerija</a>
-                </li>
-                <li>
-                    <a href="contactus.php">Kontakti</a>
-                </li>
-                <li>
-                    <a href="reservation.php">Rezervācija</a>
-                </li>
-                <?php if(isset($_SESSION['user_name'])): ?>
-                    <?php if($_SESSION['user_type'] == 'admin'): ?>
-                        <li><a href="admin_page.php">Admin</a></li>
-                    <?php else: ?>
-                        <li><a href="profile.php">Profile</a></li>
-                    <?php endif; ?>
-                    <li><a href="logout.php">Logout</a></li>
-                <?php else: ?>
-                    <li><a href="login_form.php">Login</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
+        <h1><i class="fa-solid fa-tree"></i> Brīva Laika Pavadīšanas Portāls <i class="fa-solid fa-person-walking"></i></h1>
     </header>
-    <br>
-    <!--Ziņu satura sadaļa-->
+    <nav>
+        <ul id="menu-link">
+            <li>
+                <a href="index.php">Mājas</a>
+            </li>
+            <li>
+                <a class="active-page" href="news.php">Jaunumi</a>
+            </li>
+            <li>
+                <a href="gallery.php">Galerija</a>
+            </li>
+            <li>
+                <a href="contactus.php">Kontakti</a>
+            </li>
+            <li>
+                <a href="reservation.php">Rezervācija</a>
+            </li>
+            <?php if(isset($_SESSION['user_name'])): ?>
+                <?php if($_SESSION['user_type'] == 'admin'): ?>
+                    <li><a href="admin_page.php">Admin</a></li>
+                <?php else: ?>
+                    <li><a href="profile.php">Profile</a></li>
+                <?php endif; ?>
+                <li><a href="logout.php">Logout</a></li>
+            <?php else: ?>
+                <li><a href="login_form.php">Login</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+
+    <!-- News content section -->
     <section>
-        <h2 class="section-headings">Drīzumā!</h2>
-        <br>
+        <h2 class="section-headings">Jaunumi</h2>
         <div id="news-box">
-            <p>Mūsu vasaras nometne tagad ir IESLĒGTA, no pirmdienas līdz piektdienai, nepilna laika vai pilna laika. Aktivitātes priekš
-                Juniori 5.-12. Bērni
-                tiek sadalīti grupās atbilstoši vecumam. <a href="contactus.html#form-heading">Nosūtiet mums ziņu</a> lai iegūtu vairāk informācijas. Vietas ir
-                ierobežots.
-            </p>
-            <br>
-            <p>Šeit mums ir milzīga zaļā zona, un mēs domājam, kā to izmantot daudz labāk
-                piknika veidošana
-                apgabalā. Lieliska jauna telpa jums un jūsu ģimenei. Vairāk informācijas drīzumā!
-            </p>
-            <br>
-            <p>
-                Domājot par iespējām, mēs paplašinām savus pakalpojumus. JM Akupunktūra nāk, lai ieviestu jauninājumus
-                telpa. Neaizmirstiet, ka dalībai ir 10% ATLAIDE visiem pakalpojumiem. Vairāk informācijas drīzumā!
-            </p>
+            <?php echo nl2br($news['content']); ?>
+            <p>Ja ir kādi jautājumi, <a href="contactus.php">sazinieties ar mums</a>.</p>
         </div>
     </section>
 
-    <!--Address, open time, contact and social media-->
+    <!-- Address, open time, contact and social media -->
     <footer class="social-media">
         <h4>Ventspils iela 50 k-4, Latvija</h4>
         <h4>+371 (124) 445 88</h4>
@@ -231,7 +213,6 @@ session_start();
                 <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
             </li>
         </ul>
-      
     </footer>
 
     <!-- font awesome script-->

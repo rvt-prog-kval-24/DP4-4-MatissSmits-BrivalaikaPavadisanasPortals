@@ -235,15 +235,22 @@ session_start();
     <section id="contact-us">
         <h2 class="section-headings">Kontakti</h2>
         <br>
-        <p>Mums ir svarīgi, lai mūsu klienti tiktu atjaunināti. Ja jums ir kādi jautājumi vai vēlaties iegūt vairāk informācijas
-            par mūsu aktivitātēm vai dalību, lūdzu, sazinieties ar mums, izmantojot tālāk esošo veidlapu. Atkārtojumi tiek veikti kā
-            drīzumā
-            pēc iespējas. Aicinām arī zvanīt. Mēs esam šeit no pirmdienas līdz piektdienai no 07:00 līdz 22:00, ieskaitot banku
-            brīvdienas.</p>
+        <p>Mums ir svarīgi, lai mūsu klienti tiktu informēti. Ja jums ir kādi jautājumi vai vēlaties iegūt vairāk informācijas
+            par mūsu aktivitātēm vai rezervācijām, lūdzu, sazinieties ar mums, izmantojot tālāk esošo veidlapu.  Aicinām arī zvanīt. Mēs esam šeit no pirmdienas līdz sestdienai.</p>
     </section>
     <br>
     <section id="contact-box">
-        <form id="contact-form" action="https://formdump.codeinstitute.net/" method="post">
+        <?php
+        if (isset($_SESSION['success'])) {
+            echo '<p class="success-msg">'.$_SESSION['success'].'</p>';
+            unset($_SESSION['success']);
+        }
+        if (isset($_SESSION['error'])) {
+            echo '<p class="error-msg">'.$_SESSION['error'].'</p>';
+            unset($_SESSION['error']);
+        }
+        ?>
+        <form id="contact-form" action="submit_contact.php" method="post">
             <h3 id="form-heading">Nosūtiet mums ziņu</h3>
             <fieldset class="line-box">
                 <legend>Jūsu informācija</legend>
@@ -265,10 +272,10 @@ session_start();
                 <label for="info-list"></label>
                 <input class="fill-out" type="text" id="info-list" list="info" name="vairak-info" placeholder="Izvēlaties tēmu" required>
                 <datalist id="info">
-                    <option value="Extra-Aktivitates"></option>
-                    <option value="Gym"></option>
+                    <option value="REzervācija"></option>
+                    <option value="Pieteikšanās"></option>
                     <option value="Dalība"></option>
-                    <option value="Vasaras-kempings"></option>
+                    <option value="IT problemas"></option>
                     <option value="Citi"></option>
                 </datalist>
             </fieldset>

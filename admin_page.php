@@ -7,10 +7,6 @@ if (!isset($_SESSION['user_name']) || $_SESSION['user_type'] !== 'admin') {
     exit();
 }
 
-// // Reset slots at the start of each day
-// $reset_query = "UPDATE activities SET available_slots = max_slots";
-// mysqli_query($conn, $reset_query);
-
 // Add activity
 if (isset($_POST['add_activity'])) {
     $day = mysqli_real_escape_string($conn, $_POST['day']);
@@ -26,6 +22,36 @@ if (isset($_POST['add_activity'])) {
         $error = "Kļūda pievienojot aktivitāti!";
     }
 }
+
+// Handle message deletion
+if (isset($_POST['delete_message'])) {
+    $message_id = mysqli_real_escape_string($conn, $_POST['message_id']);
+    $delete_query = "DELETE FROM contact_messages WHERE id = $message_id";
+    if (mysqli_query($conn, $delete_query)) {
+        $message = "Ziņojums dzēsts veiksmīgi!";
+    } else {
+        $error = "Kļūda dzēšot ziņojumu!";
+    }
+}
+
+// Fetch news content
+$news_query = "SELECT * FROM news_content ORDER BY id ASC LIMIT 1";
+$news_result = mysqli_query($conn, $news_query);
+$news = mysqli_fetch_assoc($news_result);
+
+// Update news content
+if (isset($_POST['edit_news'])) {
+    $news_content = mysqli_real_escape_string($conn, $_POST['news_content']);
+    
+    $update_news = "UPDATE news_content SET content = '$news_content' WHERE id = " . $news['id'];
+    
+    if (mysqli_query($conn, $update_news)) {
+        $message = "Jaunumu saturs veiksmīgi atjaunināts!";
+    } else {
+        $error = "Kļūda atjauninot jaunumu saturu!";
+    }
+}
+
 
 // Edit activity
 if (isset($_POST['edit_activity'])) {
@@ -164,6 +190,80 @@ if (count($user_conditions) > 0) {
 
 $user_filter_query .= " ORDER BY id ASC";
 $users_result = mysqli_query($conn, $user_filter_query);
+
+if (isset($_POST['upload_image'])) {
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+    // Check if image file is a actual image or fake image
+    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    if ($check !== false) {
+        $uploadOk = 1;
+    } else {
+        $error = "File is not an image.";
+        $uploadOk = 0;
+    }
+
+    // Check if file already exists
+    if (file_exists($target_file)) {
+        $error = "Sorry, file already exists.";
+        $uploadOk = 0;
+    }
+
+    // Check file size
+    if ($_FILES["image"]["size"] > 500000) {
+        $error = "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+
+    // Allow certain file formats
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+        $error = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        // Handle error
+    } else {
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+            $insert = "INSERT INTO gallery_images (image_path) VALUES ('$target_file')";
+            if (mysqli_query($conn, $insert)) {
+                $message = "Image uploaded successfully!";
+            } else {
+                $error = "Error uploading image!";
+            }
+        } else {
+            $error = "Sorry, there was an error uploading your file.";
+        }
+    }
+}
+
+// Handle image deletion
+if (isset($_POST['delete_image'])) {
+    $image_id = $_POST['image_id'];
+    $query = "SELECT image_path FROM gallery_images WHERE id = $image_id";
+    $result = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($result)) {
+        $image_path = $row['image_path'];
+        if (unlink($image_path)) {
+            $delete_query = "DELETE FROM gallery_images WHERE id = $image_id";
+            if (mysqli_query($conn, $delete_query)) {
+                $message = "Image deleted successfully!";
+            } else {
+                $error = "Error deleting image from database!";
+            }
+        } else {
+            $error = "Error deleting image file!";
+        }
+    }
+}
+
+// Fetch images for gallery
+$gallery_query = "SELECT * FROM gallery_images";
+$gallery_result = mysqli_query($conn, $gallery_query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -184,6 +284,21 @@ $users_result = mysqli_query($conn, $user_filter_query);
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <script src="https://cdn.tiny.cloud/1/psaegtq7q15xsvtrto6au8rkzs8elaf8nkr2lr0thulozmr7/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+  });
+</script>
 
     <style>
         body {
@@ -194,23 +309,6 @@ $users_result = mysqli_query($conn, $user_filter_query);
             background: url('assets/images/background.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #333;
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        #hero {
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        #logo {
-            font-family: 'Libre Bodoni', serif;
-            font-size: 2rem;
-            color: #5a8f7b;
-            animation: fadeInDown 1s ease-in-out;
         }
 
         header {
@@ -314,6 +412,7 @@ $users_result = mysqli_query($conn, $user_filter_query);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 20px;
             max-width: 800px;
+            overflow-x: auto;
         }
 
         .content h2 {
@@ -366,31 +465,35 @@ $users_result = mysqli_query($conn, $user_filter_query);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
+            overflow-x: auto;
         }
 
         .activities-table,
         .users-table,
-        .reservations-table {
+        .reservations-table,
+        .gallery-table {
             width: 100%;
             border-collapse: collapse;
         }
 
         .activities-table th, .activities-table td,
         .users-table th, .users-table td,
-        .reservations-table th, .reservations-table td {
+        .reservations-table th, .reservations-table td,
+        .gallery-table th, .gallery-table td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
 
-        .activities-table th, .users-table th, .reservations-table th {
+        .activities-table th, .users-table th, .reservations-table th, .gallery-table th {
             background-color: #5a8f7b;
             color: white;
         }
 
         .activities-table td a,
         .users-table td a,
-        .reservations-table td a {
+        .reservations-table td a,
+        .gallery-table td a {
             margin-right: 10px;
             color: #5a8f7b;
             text-decoration: none;
@@ -398,7 +501,8 @@ $users_result = mysqli_query($conn, $user_filter_query);
 
         .activities-table td a:hover,
         .users-table td a:hover,
-        .reservations-table td a:hover {
+        .reservations-table td a:hover,
+        .gallery-table td a:hover {
             text-decoration: underline;
         }
 
@@ -565,6 +669,9 @@ $users_result = mysqli_query($conn, $user_filter_query);
                 <li><a href="#" class="nav-link" data-target="users-container">Lietotāji</a></li>
                 <li><a href="#" class="nav-link" data-target="activities-container">Aktivitātes</a></li>
                 <li><a href="#" class="nav-link" data-target="reservations-container">Rezervācijas</a></li>
+                <li><a href="#" class="nav-link" data-target="gallery-container">Galerija</a></li>
+                <li><a href="#" class="nav-link" data-target="messages-container">Ziņojumi</a></li>
+                <li><a href="#" class="nav-link" data-target="news-container">Jaunumi</a></li>
                 <li><a href="logout.php">Izrakstīties</a></li>
             </ul>
         </div>
@@ -692,6 +799,106 @@ $users_result = mysqli_query($conn, $user_filter_query);
                     }
                     ?>
                 </table>
+            </div>
+
+            <div class="gallery-container" style='display: none;'>
+                <h2>Pievienot Bildi Galerijai</h2>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <h3>Aizpildiet formu</h3>
+                    <?php
+                    if(isset($error)){
+                        echo '<span class="error-msg">'.$error.'</span>';
+                    }
+                    if(isset($message)){
+                        echo '<span class="success-msg">'.$message.'</span>';
+                    }
+                    ?>
+                    <input class="fill-out" type="file" name="image" required>
+                    <input class="form-btn" type="submit" name="upload_image" value="Pievienot">
+                </form>
+
+                <h2>Galerijas Bildes</h2>
+                <table class="reservations-table">
+                    <tr>
+                        <th>Bilde</th>
+                        <th>Darbības</th>
+                    </tr>
+                    <?php
+                    if (mysqli_num_rows($gallery_result) > 0) {
+                        while ($row = mysqli_fetch_assoc($gallery_result)) {
+                            echo '<tr>';
+                            echo '<td><img src="'.$row['image_path'].'" alt="Gallery Image" width="100"></td>';
+                            echo '<td>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="image_id" value="'.$row['id'].'">
+                                        <input class="form-btn" type="submit" name="delete_image" value="Dzēst">
+                                    </form>
+                                  </td>';
+                            echo '</tr>';
+                        }
+                    } else {
+                        echo '<tr><td colspan="3">Nav pievienotas bildes.</td></tr>';
+                    }
+                    ?>
+                </table>
+            </div>
+
+            <div class="messages-container" style='display: none;'>
+                <h2>Ziņojumi no klientiem</h2>
+                <table class="reservations-table">
+                    <tr>
+                        <th>Vārds</th>
+                        <th>Uzvārds</th>
+                        <th>Telefona numurs</th>
+                        <th>E-pasts</th>
+                        <th>Tēma</th>
+                        <th>Ziņa</th>
+                        <th>Izveidots</th>
+                        <th>Darbības</th>
+                    </tr>
+                    <?php
+                    $messages_query = "SELECT * FROM contact_messages";
+                    $messages_result = mysqli_query($conn, $messages_query);
+                    if (mysqli_num_rows($messages_result) > 0) {
+                        while ($row = mysqli_fetch_assoc($messages_result)) {
+                            echo '<tr>';
+                            echo '<td>'.$row['fname'].'</td>';
+                            echo '<td>'.$row['sname'].'</td>';
+                            echo '<td>'.$row['phone'].'</td>';
+                            echo '<td>'.$row['email'].'</td>';
+                            echo '<td>'.$row['subject'].'</td>';
+                            echo '<td>'.$row['message'].'</td>';
+                            echo '<td>'.$row['created_at'].'</td>';
+                            echo '<td>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="message_id" value="'.$row['id'].'">
+                                        <input class="form-btn" type="submit" name="delete_message" value="Dzēst">
+                                    </form>
+                                  </td>';
+                            echo '</tr>';
+                        }
+                    } else {
+                        echo '<tr><td colspan="9">Nav pievienotas ziņas.</td></tr>';
+                    }
+                    ?>
+                </table>
+            </div>
+
+            <div class="news-container" style="display: none;">
+                <h2>Rediģēt Jaunumu Saturu</h2>
+                <form action="" method="post">
+                    <h3>Jaunumu Saturs</h3>
+                    <?php
+                    if(isset($error)){
+                        echo '<span class="error-msg">'.$error.'</span>';
+                    }
+                    if(isset($message)){
+                        echo '<span class="success-msg">'.$message.'</span>';
+                    }
+                    ?>
+                    <textarea id="news_content" name="news_content"><?php echo isset($news['content']) ? $news['content'] : ''; ?></textarea>
+                    <input class="form-btn" type="submit" name="edit_news" value="Atjaunināt">
+                </form>
             </div>
         </div>
 
@@ -945,70 +1152,31 @@ $(document).ready(function() {
             $('#user-filters').show();
             $('#activity-filters').hide();
             $('#reservation-filters').hide();
-            loadUsers();
         } else if (target === 'activities-container') {
             $('#user-filters').hide();
             $('#activity-filters').show();
             $('#reservation-filters').hide();
-            loadActivities();
         } else if (target === 'reservations-container') {
             $('#user-filters').hide();
             $('#activity-filters').hide();
             $('#reservation-filters').show();
-            loadReservations();
+        } else if (target === 'gallery-container') {
+            $('#user-filters').hide();
+            $('#activity-filters').hide();
+            $('#reservation-filters').hide();
+        } else if (target === 'news-container') {
+            $('#user-filters').hide();
+            $('#activity-filters').hide();
+            $('#reservation-filters').hide();
         }
     });
-
-    // Load activities
-    function loadActivities() {
-        var filterData = $('#filter-form').serialize();
-        $.ajax({
-            url: 'fetch_activities.php',
-            type: 'POST',
-            data: filterData,
-            success: function(data) {
-                $('.activities-container table').html(data);
-            }
-        });
-    }
-
-    // Load users
-    function loadUsers() {
-        var filterData = $('#filter-form').serialize();
-        $.ajax({
-            url: 'fetch_users.php',
-            type: 'POST',
-            data: filterData,
-            success: function(data) {
-                $('.users-container table').html(data);
-            }
-        });
-    }
-
-    // Load reservations
-    function loadReservations() {
-        var filterData = $('#filter-form').serialize();
-        $.ajax({
-            url: 'fetch_reservations.php',
-            type: 'POST',
-            data: filterData,
-            success: function(data) {
-                $('.reservations-container table').html(data);
-            }
-        });
-    }
 
     // Show users by default
     $('.users-container').show();
     $('#user-filters').show();
     $('#activity-filters').hide();
     $('#reservation-filters').hide();
-    loadUsers();
-});   $('#edit-user-email').val($(this).data('email'));
-     
-
-
-
+});
     </script>
 </body>
 

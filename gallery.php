@@ -203,15 +203,18 @@ session_start();
     <h2 class="section-headings">Galerija</h2>
     <!--Galery contents-->
     <section id="galery-page">
-        <img class="slides active-slide" src="assets/images/Bambini-che-giocano-al-parco.webp" alt="Kids playing with balloons outdoors in a beautiful green area.">
-        <img class="slides" src="assets/images/boy-7056003_640.webp" alt="Zēns trenējas futbolā ārā uz sintētiskā lauka.">
-        <img class="slides" src="assets/images/coffee-1159011_640.webp" alt="A cup with coffee on a saucer with a glass of tea with milk beside.">
-        <img class="slides" src="assets/images/istockphoto-1353282196-612x612.webp" alt="bērni trenējas taekvondo.">
-        <img class="slides" src="assets/images/istockphoto-1440503559-170667a.webp" alt="Skaista, liela, zaļa teritorija saulainā dienā.">
-        <img class="slides" src="assets/images/istockphoto-1456865386-612x612.webp" alt="Kungs un dāma, kas trenējas sporta zālē.">
-        <img class="slides" src="assets/images/woman-2662237_640.webp" alt="Sieviete, kas nodarbojas ar jogu ārā, skaistā zaļā zonā.">
-        <img class="slides" src="assets/images/zumba-4333580_640.webp" alt="Cilvēki, kas nodarbojas ar zumbu ārā skaistā saulainā dienā.">
-        <img class="slides" src="assets/images/burlington-1541790_640.webp" alt="Bērni spēlējas iekštelpu atpūtas zonā.">
+        <?php
+        $query = "SELECT * FROM gallery_images";
+        $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '<img class="slides" src="'.$row['image_path'].'" alt="Gallery Image">';
+            }
+        } else {
+            echo '<p>No images found in the gallery.</p>';
+        }
+        ?>
         <div class="controls">
             <button class="control-btn" id="prev">&#10094;</button>
             <button class="control-btn" id="next">&#10095;</button>
@@ -234,7 +237,6 @@ session_start();
                 <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Apskatiet mūsu twitter lapu (opens in a new tab)"><i class="fa-brands fa-square-twitter"></i></a>
             </li>
         </ul>
-      
     </footer>
 
     <!-- font awesome script-->

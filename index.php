@@ -278,26 +278,22 @@ foreach ($days as $day) {
     <h2 class="section-headings">Perfekta vieta priekš Jums!</h2>
     <br>
     <section>
-        <p id="intro">Briva Laika Pavadisanas Portals tika izveidota ar misiju motivēt ģimenes praktizēt vingrinājumus. Jums nav jāuztraucas par to, kurš iebildīs pret bērniem, kamēr jūs veicat savus vingrinājumus, vai par to, ko jūs darīsit, kamēr bērni veiks savus vingrinājumus aktivitātes. Šeit ir aktivitātes ikvienam (bērniem, kas vecāki par 5 gadiem). <a href="contactus.php">Kontakti</a> lai iegūtu papildinformāciju par mūsu pakalpojumiem un dalību, vai vienkārši rezervējiet savus laika nišas, un strādāsim ārā!</p>
+        <p id="intro">Brīvā Laika Pavadīšanas Portāls tika izveidots ar misiju motivēt ģimenes praktizētiem vingrinājumiem. Jums nav jāuztraucas par to, ka kāds iebildīs pret bērniem, kamēr jūs veicat savus vingrinājumus. Šeit ir aktivitātes ikvienam gan lieliem, gan maziem. Šeit var piedalīties bērni sākot no 5. gadu vecuma!. <a href="contactus.php">Kontakti</a> lai iegūtu papildinformāciju par mūsu pakalpojumiem un dalību,Sazinieties ar mums kontaktu sadaļā!</p>
         <br>
         <div class="about-us-container">
             <div class="about-us">
                 <h3 class="about-us-headings">Trenniņi <i class="fa-solid fa-dumbbell"></i></h3>
                 <hr>
-                <p>Ar lielu apsildāmu peldbaseinu un trenažieru zāli ar modernu aprīkojumu nav attaisnojuma, lai nedarbotos.</p>
+                <p>Mums ir liels peldbaseins, kā arī trennežierzāle, tāpēc Jums nav iemesla neatnākt un neizmēģināt ko vairāk par šo!</p>
             </div>
 
             <div class="about-us">
                 <h3 class="about-us-headings">Bērnu aktivitātes <i class="fa-brands fa-slideshare"></i></h3>
                 <hr>
-                <p>Neuztraucieties par laikapstākļiem, mums ir aktivitātes katram gadalaikam. Mūsu iekštelpu/āra rotaļu laukums un sintētiskais lauks tika izveidots, lai nodrošinātu bērniem aktivitātes IESLĒGTS visa gada garumā.</p>
+                <p>Neuztraucaties par slikto laiku, jo mums nodarbības pārsvarā notiek iegštelpās, aplūkojiet Extra kativitātes joslu zemāk un veiciet rezervāciju! (bērniem no 5 gadu vecuma)</p>
             </div>
 
-            <div class="about-us">
-                <h3 class="about-us-headings">Paņem pauzi <i class="fa-solid fa-mug-hot"></i></h3>
-                <hr>
-                <p>Nepieciešams pārtraukums? Mūsu kafejnīca ir lieliska vieta, kur pasēdēt un baudīt mūsu veselīgo ēdienkarti elpot. Dalībai ir 10% ATLAIDE!</p>
-            </div>
+            
         </div>
     </section>
     <!--Extra aktivitāšu sadaļa-->
